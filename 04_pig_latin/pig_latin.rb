@@ -1,37 +1,27 @@
-require 'active_support/core_ext/enumerable.rb'
+require 'active_support/core_ext/enumerable.rb' #to use .exclude
 
 def translate(string)
-vowel = 'a', "e", "i", "o", "u"
-consonant = 'b', 's'
-word=string.split(' ')
-arr=[]
-ans=[]
+  vowel = 'a', "e", "i", "o", "u"
+  consonant = 'b', 's'
+  word=string.split(' ')
+  arr=[]
+  ans=[]
   word.each do |x| arr = x.split('')
-  
- if (arr[0]=='q' and arr[1]=='u')  then
- new=arr.shift(2)
- arr<<new
- arr<<('ay')
- ans<<arr.join
- return ans.join(sep=" ")
- 
-  elsif (consonant.include?(arr[0]) && (arr[1]=='q' and arr[2]=='u')) then
- new=arr.shift(3)
- arr<<new
- arr<<('ay')
- ans<<arr.join
- return ans.join(sep=" ")
- 
- 
+	if (arr[0]=='q' and arr[1]=='u')  then
+	  new=arr.shift(2)
+	  arr<<new
+	elsif (consonant.include?(arr[0]) && (arr[1]=='q' and arr[2]=='u')) then
+	  new=arr.shift(3)
+	  arr<<new
 	elsif vowel.exclude?(arr[0])
-	until vowel.include?(arr[0])
-	new = arr.shift
-	arr<<new
-	end
+	  until vowel.include?(arr[0])
+	    new = arr.shift
+	    arr<<new
+	  end
 	end
    arr<<('ay')
    ans<<arr.join
-   end
+  end
    return ans.join(sep=" ")
 end
 
